@@ -5,4 +5,4 @@ C#, .Net Core 5.0 , Katmanlı mimari, MS Sql Server, EntityFrameworkCore , inter
   
   
 
-Projeden kareler için [tıklayınız.]( "https://l24.im/pxy")
+Projeden kareler için [tıklayınız.](https://l24.im/pxy)
