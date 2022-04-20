@@ -1,0 +1,27 @@
+﻿@model int
+
+@*<a asp-controller="Carts" asp-action="Index" class="btn cart">
+    <i class="fa fa-shopping-cart"></i>
+    <span>(@Model)</span>
+</a>*@
+
+
+
+
+
+
+
+<div class="col-md-3">
+    <div class="user">
+        <a asp-controller="Carts" asp-action="FavoryList" class="btn wishlist">
+            <i class="fa fa-heart"></i>
+            <span id="favoryList">(@ViewBag.favoryListCount)</span>
+        </a>
+
+        <a asp-controller="Carts" asp-action="Index" class="btn cart">
+            <i class="fa fa-shopping-cart"></i>
+            <span>(@Model)</span>
+        </a>
+
+    </div>
+</div>

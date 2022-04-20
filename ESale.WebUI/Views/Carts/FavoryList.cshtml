@@ -1,0 +1,110 @@
+﻿@model ESale.WebUI.Models.FavoryBoxModel
+
+<h1>FavoryList</h1>
+
+
+
+
+@{
+    ViewData["Title"] = "Index7";
+    Layout = "~/Views/Shared/_ESaleLayout.cshtml";
+}
+
+
+
+<!-- Bottom Bar End -->
+<!-- Breadcrumb Start -->
+<div class="breadcrumb-wrap">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item active">Cart</li>
+        </ul>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Cart Start -->
+
+
+
+
+<div class="cart-page">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="cart-page-inner">
+                    <div class="table-responsive">
+
+
+                        @if (Model.FavoryItems.Count <= 0)
+                        {
+                            <div class="alert alert-warning">Sepette hiçbir ürün yok!</div>
+                        }
+                        else
+                        {
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Ürün</th>
+                                        <th>Fiyat</th>
+                                        <th>KALDIR</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="align-middle">
+
+                                    @foreach (var item in Model.FavoryItems)
+                                    {
+
+                                        <tr>
+                                            <td>
+                                                <div class="img">
+                                                    <a href="#"><img src="~/Shop/img/product-1.jpg" alt="Image"></a>
+                                                    <p>@item.Name</p>
+                                                </div>
+                                            </td>
+                                            <td>@item.Price.ToString("c")</td>
+            
+                                           
+                                            <td>
+                                                <form asp-controller="Carts" asp-action="DeleteFromFavoryBox" method="post">
+                                                    <input type="hidden" name="productId" value="@item.ProductId" />
+                                                    <button class="btn btn-danger btn-sm">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+
+                                    }
+
+                                </tbody>
+                            </table>
+                        }
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-lg-4">
+                <div class="cart-page-inner">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="coupon">
+                                <input type="text" placeholder="Kupon Kodu">
+                                <button>Kodu Uygula</button>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+    </div>
+</div>
+<!-- Cart End -->

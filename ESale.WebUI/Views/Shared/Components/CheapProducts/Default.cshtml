@@ -1,0 +1,78 @@
+﻿
+@model IEnumerable<ESale.Entities.Concrete.Product>
+
+
+
+<div class="featured-product product">
+    <div class="container-fluid">
+        <div class="section-header">
+            <h1>En Ucuz Ürünlerimiz</h1>
+        </div>
+        <div class="row align-items-center product-slider product-slider-4">
+
+
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3">
+                    <div class="product-item">
+                        <div class="product-title">
+                            <a href="/Shops/Details/@item.Id">@item.Name</a>
+                            <div class="ratting">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="product-image">
+                            <a href="/Shops/Details/@item.Id">
+                                <img src="~/Shop/img/product-1.jpg" alt="Product Image">
+                            </a>
+                            <div class="product-action">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <form asp-controller="Carts" asp-action="AddtoCart" method="post" style="display:inline">
+
+
+                                        <input type="hidden" name="productId" value="@item.Id" />
+                                        <input type="hidden" name="quantity" value="1" />
+                                        <button class="btn btn-cart" type="submit"><i class="fa fa-cart-plus"></i></button>
+
+                                    </form>
+
+                                }
+                                <a href="#"><i class="fa fa-heart"></i></a>
+                                <a href="/Shops/Details/@item.Id"><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+                        <div class="product-price">
+                            <h3><span>₺</span>@item.Price</h3>
+
+
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <form asp-controller="Carts" asp-action="AddtoCart" method="post" style="display:inline">
+
+
+                                    <input type="hidden" name="productId" value="@item.Id" />
+                                    <input type="hidden" name="quantity" value="1" />
+                                    <button class="btn btn-cart" type="submit"><i class="fa fa-shopping-cart"></i>Satın Al</button>
+
+                                </form>
+
+                            }
+
+
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿
+@model ESale.WebUI.Models.CommentModel
+
+
+
+
+<div id="reviews" class="container tab-pane fade">
+
+
+
+
+    @await Component.InvokeAsync("ProductCommentList", new { id = Model.ProductId})
+
+
+    <form asp-controller="Comments" asp-action="CreateComment" method="post" class="reviews-submit">
+        <h4>Yorum Yap</h4>
+        <div class="ratting">
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+        </div>
+        <div class="row form">
+            <div class="col-sm-6">
+                <input type="hidden" name="ProductId" value="@Model.ProductId" />
+                <input type="text" readonly value="@Model.UserName" name="UserName" placeholder="Kullanıcı adı">
+
+            </div>
+            <div class="col-sm-12">
+                <textarea name="Description" placeholder="Açıklama"></textarea>
+            </div>
+            <div class="col-sm-12">
+                <button>PAYLAŞ</button>
+            </div>
+        </div>
+    </form>
+
+
+
+</div>

@@ -1,0 +1,40 @@
+﻿@model ESale.WebUI.Models.CategoryListViewModel
+
+
+<div class="header">
+    <div class="container-fluid">
+        <div class="row">
+
+
+            <!-- MENU -->
+
+            <div class="col-md-3">
+                <nav class="navbar bg-light" style="max-height:600px">
+                    <ul class="navbar-nav">
+                        @foreach (var x in Model.Categories)
+                        {
+                            <li class="nav-item">
+                                <a asp-controller="Shops" asp-action="List" asp-route-categoryname="@x.Name.ToLower()"
+                                   class="nav-link @(Model.SelectedCategory==x.Name.ToLower()?"active":"")"><i class="fa fa-shopping-bag"></i>@x.Name</a>
+                            </li>
+
+                        }
+
+
+                    </ul>
+                </nav>
+            </div>
+
+
+            <!-- SLİDER-->
+
+            @await Html.PartialAsync("_Slider")
+
+
+          
+
+
+
+        </div>
+    </div>
+</div>

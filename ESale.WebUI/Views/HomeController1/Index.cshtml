@@ -1,0 +1,26 @@
+﻿@model ESale.WebUI.Models.ProductListModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-3">
+        @await Component.InvokeAsync("CategoryList")
+    </div>
+    <div class="col-md-9">
+
+        <partial name="_Slider" />
+
+        <div class="row">
+            @foreach (var item in Model.Products)
+            {
+            <partial name="_Product" for="@item" />
+            }
+        </div>
+
+
+    </div>
+</div>

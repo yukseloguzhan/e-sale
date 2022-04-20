@@ -1,0 +1,117 @@
+﻿@model ESale.WebUI.Models.LoginModel
+
+
+@{
+    ViewData["Title"] = "Index4";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+<script>
+
+    $(document).ready(function () {
+        $("#sendbtn").click(function (e) {
+            //Serialize the form datas.
+            var valdata = $("#loginform").serialize();
+            //to get alert popup
+          /*  alert(valdata);*/
+            $.ajax({
+                url: "/Accounts/Login",
+                type: "POST",
+                dataType: 'json',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+
+                data: valdata,
+                success: function () {
+                    console.log(e.data);
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+<form id="loginform" class="form-horizontal templatemo-login-form-2" role="form" asp-controller="Accounts" asp-action="Login" method="post" enctype="multipart/form-data">
+
+
+    <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1>HESAP GİRİŞ</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="templatemo-one-signin col-md-6">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <label asp-for="Email" class="control-label">Email</label>
+                    <div class="templatemo-input-icon-container">
+                        <i class="fa fa-user"></i>
+                        <input type="text" asp-for="Email" value="@Model.Email" class="form-control" id="username" placeholder="">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <label asp-for="Password" class="control-label">Şifre</label>
+                    <div class="templatemo-input-icon-container">
+                        <i class="fa fa-lock"></i>
+                        <input type="password" asp-for="Password" value="@Model.Password" class="form-control" id="password" placeholder="">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Beni hatırla
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input type="submit" id="sendbtn" value="GİRİŞ YAP" class="btn btn-warning">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <a asp-controller="Accounts" asp-action="Register" class="text-center">Hesabın yok mu ?  |   Kayıt ol</a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="templatemo-other-signin col-md-6">
+            <img style="width:285px;height:275px;border-radius:10px;" src="~/Login/images/login.jpg" alt="Alternate Text" />
+
+        </div>
+
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+</form>
+
+
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+
+
+}

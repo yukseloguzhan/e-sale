@@ -1,0 +1,51 @@
+﻿@using ESale.WebUI.Identity
+@model List<ApplicationRole>
+
+@{
+    ViewData["Title"] = "RoleList";
+    Layout = "~/Views/Shared/_ESaleLayout.cshtml";
+}
+
+<h1>RoleList</h1>
+
+<div class="table-responsive">
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody class="align-middle">
+
+
+            @foreach (var item in Model)
+            {
+
+
+
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>
+                        <form asp-controller="Carts" asp-action="DeleteFromCart" method="post">
+                            <input type="hidden" name="productId" value="" />
+                            <button class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+    }
+
+
+
+
+
+</div>

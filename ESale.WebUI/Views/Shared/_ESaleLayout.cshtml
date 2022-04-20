@@ -1,0 +1,180 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>@ViewData["Title"]</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ESale" name="keywords">
+    <meta content="ESale" name="description">
+
+    <link href="~/Shop/img/favicon.ico" rel="icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="~/Shop/lib/slick/slick.css" rel="stylesheet">
+    <link href="~/Shop/lib/slick/slick-theme.css" rel="stylesheet">
+    <link href="~/Shop/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    @await Html.PartialAsync("_Navbar")
+
+
+    <div class="bottom-bar">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <div class="logo">
+                        <a asp-controller="Home" asp-action="Index2">
+                            <img src="~/Shop/img/logo.png" alt="Logo">
+                        </a>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <div class="search">
+
+                        @using (Html.BeginForm("SearchList", "Shops", FormMethod.Post))
+                        {
+
+                            <input type="text" name="productName" value="@ViewBag.productName" placeholder="Binlerce üründen istediğini ara">
+                            <button><i class="fa fa-search"></i></button>
+                        }
+
+
+                    </div>
+                </div>
+
+
+
+
+                @*<div class="col-md-3">
+                    <div class="user">
+                        <a href="wishlist.html" class="btn wishlist">
+                            <i class="fa fa-heart"></i>
+                            <span id="favoryList">(0)</span>
+                        </a>*@
+
+                        @await Component.InvokeAsync("CartProductsCount")
+
+                    @*</div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+
+
+
+
+    @RenderBody()
+
+
+    <!-- Review End -->
+    <!-- Footer Start -->
+    <div class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h2>Bilgi</h2>
+                        <div class="contact-info">
+                            <p><i class="fa fa-map-marker"></i>E-Satış, İstanbul, Türkiye</p>
+                            <p><i class="fa fa-envelope"></i>yukseloguzhan53@gmail.com</p>
+                            <p><i class="fa fa-phone"></i>0539 954 69 04</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h2>Takip edin</h2>
+                        <div class="contact-info">
+                            <div class="social">
+                                <a href=""><i class="fab fa-twitter"></i></a>
+                                <a href=""><i class="fab fa-facebook-f"></i></a>
+                                <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a href=""><i class="fab fa-instagram"></i></a>
+                                <a href=""><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h2>Hakkımızda</h2>
+                        <ul>
+                            <li><a href="#">Biz kimiz ?</a></li>
+                            <li><a href="#">Neden biz ? </a></li>
+                            <li><a href="#">Terms & Condition</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h2>Gizlilik şartları</h2>
+                        <ul>
+                            <li><a href="#">İletişim</a></li>
+                            <li><a href="#">Kargo</a></li>
+                            <li><a href="#">İade</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row payment align-items-center">
+                <div class="col-md-6">
+                    <div class="payment-method">
+                        <h2>Kartlar:</h2>
+                        <img src="~/Shop/img/payment-method.png" alt="Payment Method" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="payment-security">
+                        <h2>Güvenlik:</h2>
+                        <img src="~/Shop/img/godaddy.svg" alt="Payment Security" />
+                        <img src="~/Shop/img/norton.svg" alt="Payment Security" />
+                        <img src="~/Shop/img/ssl.svg" alt="Payment Security" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-6 template-by">
+                    <p>By <a href="#">OĞUZHAN YÜKSEL</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Shop/lib/easing/easing.min.js"></script>
+    <script src="~/Shop/lib/slick/slick.min.js"></script>
+    <script src="~/Shop/js/main.js"></script>
+   
+
+    @RenderSection("Scripts", false)
+
+</body>
+</html>

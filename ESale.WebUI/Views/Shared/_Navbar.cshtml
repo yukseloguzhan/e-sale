@@ -1,0 +1,40 @@
+﻿
+
+
+<div class="nav">
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <a href="#" class="navbar-brand">MENU</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav mr-auto">
+                    <a asp-controller="Home" asp-action="Index2" class="nav-item nav-link active">Anasayfa</a>
+                    <a asp-controller="Shops" asp-action="List" asp-route-categoryname="" class="nav-item nav-link">Ürünler</a>
+                    <a asp-controller="Home" asp-action="Contact" class="nav-item nav-link">İletişim</a>
+                    <a href="#" class="nav-item nav-link">Kampanyalar</a>
+                    <a href="#" class="nav-item nav-link">Yeni Gelenler</a>
+                    <a href="#" class="nav-item nav-link">Hesabım</a>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="/Accounts/Logout" class="nav-item nav-link">Çıkış</a>
+                    } 
+                    
+
+                </div>
+                <div class="navbar-nav ml-auto">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">HESAP</a>
+                        <div class="dropdown-menu">
+                            <a asp-controller="Accounts" asp-action="Login" class="dropdown-item">Giriş Yap</a>
+                            <a asp-controller="Accounts" asp-action="Register" class="dropdown-item">Üye Ol</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

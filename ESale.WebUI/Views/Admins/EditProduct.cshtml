@@ -1,0 +1,137 @@
+﻿@model ESale.WebUI.Models.ProductModel
+
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+    var counter = 0;
+}
+
+
+
+<h1>Edit Product</h1>
+<hr />
+
+
+
+<form asp-controller="Admins" asp-action="EditProduct" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+
+    <div class="row">
+        <div class="col-md-8">
+
+
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="form-group row">
+                <label asp-for="Name" class="col-md-2 col-form-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Name" value="@Model.Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ImageURL" class="col-md-2 col-form-label"></label>
+                <div class="col-md-10">
+                    <input type="hidden" name="ImageURL" value="@Model.ImageURL" class="form-control" />
+                    <img src="~/ProductImages/@Model.ImageURL" width="80" />
+                    <input type="file" name="ImageFile" class="form-control" />
+                    <span asp-validation-for="ImageURL" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Description" class="col-md-2 col-form-label"></label>
+                <div class="col-md-10">
+                    <textarea id="editor" asp-for="Description" class="form-control">
+                        @Model.Description
+                    </textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Price" class="col-md-2 col-form-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Price" value="@Model.Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Ürün Görselleri</label>
+                <div class="col-md-10">
+                    <input type="file" name="ChosenFiles"
+                           accept="image/png, image/jpeg"
+                           maxlength="350"
+                           class="form-control"
+                           multiple
+                           id="multiimagefile">
+
+                </div>
+                <p style="color:orangered">Seçilenler</p>
+                @foreach (var x in ViewBag.imageList)
+                {
+                    <div>
+                        <a href="~/wwwroot/Uploads/@x.ImagePath"  target="_blank">@x.ImagePath</a>
+
+                        <span>
+                            <a href="/ImageFiles/Delete/@x.ImageFileId"><i class="fas fa-times-circle" style="color:crimson"></i></a>
+                            <a href="~/wwwroot/Uploads/@x.ImagePath" download=""><i class="fas fa-download" style="color:chartreuse"></i></a>
+                        </span>
+                    </div>
+                }
+            </div>
+            <div class="form-group row">
+                <div class="col-md-10 offset-md-2">
+                    <button type="submit" class="btn btn-primary">Save Product</button>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="col-md-4">
+            @foreach (var item in ViewBag.AllCategories)
+            {
+                var isChecked = "";
+
+                if (Model.SelectedCategories.Any(i => i.Id == item.Id))
+                {
+                    isChecked = "checked";
+                    <input type="hidden" name="SelectedCategories[@counter].Id" value="@item.Id" />
+                    <input type="hidden" name="SelectedCategories[@counter].Name" value="@item.Name" />
+
+                    counter++;
+
+                }
+                else
+                {
+                    isChecked = "";
+                }
+
+
+
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" name="CategoryIds" value="@item.Id" class="custom-control-input" id="category@(item.Id)" @isChecked>
+                    <label class="custom-control-label" for="category@(item.Id)">@item.Name</label>
+                </div>
+            }
+        </div>
+
+    </div>
+
+
+</form>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/js/ckeditor/ckeditor.js"></script>
+    <script>
+
+        CKEDITOR.replace("editor");
+
+    </script>
+
+
+
+}

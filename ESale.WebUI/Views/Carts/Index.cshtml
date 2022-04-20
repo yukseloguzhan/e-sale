@@ -1,0 +1,126 @@
+﻿@model ESale.WebUI.Models.CartModel
+
+
+@{
+    ViewData["Title"] = "Index7";
+    Layout = "~/Views/Shared/_ESaleLayout.cshtml";
+}
+
+
+
+<!-- Bottom Bar End -->
+<!-- Breadcrumb Start -->
+<div class="breadcrumb-wrap">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item active">Cart</li>
+        </ul>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Cart Start -->
+
+
+
+
+<div class="cart-page">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="cart-page-inner">
+                    <div class="table-responsive">
+
+
+                        @if (Model.CartItems.Count <= 0)
+                        {
+                            <div class="alert alert-warning">Sepette hiçbir ürün yok!</div>
+                        }
+                        else
+                        {
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Ürün</th>
+                                        <th>Fiyat</th>
+                                        <th>Miktar</th>
+                                        <th>Toplam</th>
+                                        <th>KALDIR</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="align-middle">
+
+                                    @foreach (var item in Model.CartItems)
+                                    {
+
+                                        <tr>
+                                            <td>
+                                                <div class="img">
+                                                    <a href="#"><img src="~/Shop/img/product-1.jpg" alt="Image"></a>
+                                                    <p>@item.Name</p>
+                                                </div>
+                                            </td>
+                                            <td>@item.Price.ToString("c")</td>
+                                            <td>
+                                                @item.Quantity
+                                            </td>
+                                            <td>@((item.Quantity * item.Price).ToString("c")) </td>
+                                            <td>
+                                                <form asp-controller="Carts" asp-action="DeleteFromCart" method="post">
+                                                    <input type="hidden" name="productId" value="@item.ProductId" />
+                                                    <button class="btn btn-danger btn-sm">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+
+                                    }
+
+                                </tbody>
+                            </table>
+                        }
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="cart-page-inner">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="coupon">
+                                <input type="text" placeholder="Kupon Kodu">
+                                <button>Kodu Uygula</button>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="cart-summary">
+                                <div class="cart-content">
+                                    <h1>SEPET ÖZETİ</h1>
+
+                                    @if (Model.CartItems.Count > 0)
+                                    {
+                                        <p>Toplam Tutar<span>@Model.TotalPrice().ToString("c")</span></p>
+                                        <p>Kargo Ücreti<span>₺1</span></p>
+                                        <h2>Genel Toplam<span>@Model.TotalPrice().ToString("c")</span></h2>
+                                    }
+                                </div>
+
+                                <div class="cart-btn">
+                                    <a class="btn btn-lg mt-3" asp-controller="Shops" asp-action="List">Alışverişe Devam</a>
+                                    <a class="btn btn-lg mt-3 ml-5" asp-controller="Carts" asp-action="CheckOut">Sipariş Ver</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Cart End -->

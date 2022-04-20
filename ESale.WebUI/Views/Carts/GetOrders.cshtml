@@ -1,0 +1,74 @@
+﻿
+@model List<OrderListModel>
+
+
+@{
+    ViewData["Title"] = "GetOrders";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+}
+
+<h1>GetOrders</h1>
+
+@foreach (var order in Model)
+{
+
+    <table class="table table-bordered table-sm mb-3">
+
+        <thead class="bg-primary text-white">
+            <tr>
+                <td colspan="2">Order Id: #@order.OrderId</td>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var x in order.OrderItems)
+            {
+                <tr>
+                    <td><img src="~/ProductImages/@x.ImageURL" width="70"  /></td>
+                    <td>@x.Name</td>
+                    <td>@x.Price</td>
+                    <td>@x.Quantity</td>
+                </tr>
+            }
+
+
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="2">Customer Name:</td>
+                <td>@order.FirstName @order.LastName</td>
+                <td rowspan="3">Toplam = @order.TotalPrice()</td>
+            </tr>
+            <tr>
+                <td colspan="2">Address:</td>
+                <td>@order.Address</td>
+            </tr>
+            <tr>
+                <td colspan="2">Phone:</td>
+                <td>@order.PhoneNumber</td>
+            </tr>
+            <tr>
+                <td colspan="2">Email:</td>
+                <td>@order.Email</td>
+            </tr>
+            <tr>
+                <td colspan="2">Payment Status:</td>
+                <td>@order.PaymentType</td>
+            </tr>
+            <tr>
+                <td colspan="2">Order Status:</td>
+                <td>@order.OrderState</td>
+            </tr>
+
+
+        </tfoot>
+
+
+
+    </table>
+
+}

@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "Anasayfa";
+    Layout = "~/Views/Shared/_ESaleLayout.cshtml";
+}
+
+
+
+@await Component.InvokeAsync("CategoryList")
+
+@await Component.InvokeAsync("ESaleFeatures")
+
+
+
+@await Component.InvokeAsync("CheapProducts")
+
+
+
+@await Component.InvokeAsync("NewSeasonProducts")
+
